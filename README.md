@@ -1,7 +1,7 @@
 # ILP Demo Maker
 > Set up a payment between many different ILP Kit nodes
 
-![7-ledger Demo](./res/demo.svg)
+![7-ledger Demo](https://interledgerjs.github.io/ilp-demo-maker/res/demo.svg)
 
 The ILP Demo Maker constructs a network of ILP Kit nodes for
 the purpose of running a demo. Each of the ILP Kits exposes a user interface,
@@ -14,7 +14,7 @@ JSON file to generate a docker compose file, containing all the ILP kits used
 to set up the required plugins. Below is an example network that this script
 could create.
 
-![Example network created by this script](./res/net.svg)
+![Example network created by this script](https://interledgerjs.github.io/ilp-demo-maker/res/net.svg)
 
 The network created is a ring, allowing any ILP Kit to pay to any other ILP
 kit. The payments go in one direction around the ring. The final ledger goes
@@ -160,7 +160,7 @@ below format.
 
 6. `rpcUris`: Set to `true` or `false` (can also be omitted). If this value is `true`, an object called `rpcUris` will be passed into the plugin constructor. It will have one key, set to the peer's account, and the value will be that peer's RPC Uri. Used for plugins like `ilp-plugin-xrp-escrow` that fall back on RPC for messaging. 
 
-![Left vs. Right](./res/left.svg)
+![Left vs. Right](https://interledgerjs.github.io/ilp-demo-maker/res/left.svg)
 
 7. `left_account`: The ILP address of the plugin on the left of the ledger. This must match `plugin.getAccount()` for the plugin, or payments will fail. In the above example, the left account is Kit 0's. Due to the routing configuration, payments always go from
 the left account to the right account. `right_account` functions the same, but for the plugin on the right.

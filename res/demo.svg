@@ -85,7 +85,7 @@
 <g id="node5" class="node">
 <title>k4</title>
 <ellipse fill="none" stroke="#000000" cx="734.0399" cy="-100.0399" rx="28.0798" ry="28.0798"/>
-<text text-anchor="middle" x="734.0399" y="-95.8399" font-family="Times,serif" font-size="14.00" fill="#000000">Kit 3</text>
+<text text-anchor="middle" x="734.0399" y="-95.8399" font-family="Times,serif" font-size="14.00" fill="#000000">Kit 4</text>
 </g>
 <!-- bp -->
 <g id="node12" class="node">
@@ -103,7 +103,7 @@
 <g id="node6" class="node">
 <title>k5</title>
 <ellipse fill="none" stroke="#000000" cx="944.0399" cy="-100.0399" rx="28.0798" ry="28.0798"/>
-<text text-anchor="middle" x="944.0399" y="-95.8399" font-family="Times,serif" font-size="14.00" fill="#000000">Kit 3</text>
+<text text-anchor="middle" x="944.0399" y="-95.8399" font-family="Times,serif" font-size="14.00" fill="#000000">Kit 5</text>
 </g>
 <!-- xe -->
 <g id="node13" class="node">
@@ -121,7 +121,7 @@
 <g id="node7" class="node">
 <title>k6</title>
 <ellipse fill="none" stroke="#000000" cx="1134.0399" cy="-100.0399" rx="28.0798" ry="28.0798"/>
-<text text-anchor="middle" x="1134.0399" y="-95.8399" font-family="Times,serif" font-size="14.00" fill="#000000">Kit 3</text>
+<text text-anchor="middle" x="1134.0399" y="-95.8399" font-family="Times,serif" font-size="14.00" fill="#000000">Kit 6</text>
 </g>
 <!-- v2 -->
 <g id="node14" class="node">
