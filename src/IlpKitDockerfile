@@ -1,0 +1,13 @@
+FROM interledgerjs/ilp-kit:v2.0.0-36-ga10ea68
+
+WORKDIR /usr/src/app
+
+# this lets the kit ping the ledger
+RUN apt-get update && apt-get install -y git netcat
+
+# fixes to allow the ILP kit to run over http
+RUN sed -i "s/('https:/('http:/" node_modules/ilp/src/lib/spsp.js
+RUN sed -i 's/tls_only: true/tls_only: false/' api/src/lib/utils.js
+
+# launch ILP kit
+CMD [ "npm", "start" ]

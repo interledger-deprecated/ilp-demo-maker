@@ -87,8 +87,8 @@ function generateConnectorLedgers (i) {
         username: 'connector'
       }
     },
-    [ledgers[i].name]: createConfig(i, ledgers[i], false),
-    [ledgers[next].name]: createConfig(i, ledgers[next], true)
+    [ledgers[i].prefix]: createConfig(i, ledgers[i], false),
+    [ledgers[next].prefix]: createConfig(i, ledgers[next], true)
   }
 
   console.error(i, Object.keys(connectorLedgers))
@@ -100,12 +100,21 @@ function generateConnectorRoutes (i) {
   const ledger = ledgers[next]
   const connectorRoutes = [ {
     targetPrefix: '',
-    connectorLedger: ledger.name,
+    connectorLedger: ledger.prefix,
     connectorAccount: ledger.right_account
   } ]
 
   console.error(i, connectorRoutes)
   return JSON.stringify(connectorRoutes)
+}
+
+function getPluginModules (i) {
+  const next = (i + 1) % ledgers.length
+  const indent = '      - ' // ' 'x6
+  const module = '/usr/src/app/node_modules/'
+
+  return (indent + './' + ledgers[i].plugin + ':' + module + ledgers[i].plugin + '\n'
+    indent + './' + ledgers[next].plugin + ':' + module + ledgers[next].plugin + '\n')
 }
 
 let file = ''
@@ -124,6 +133,7 @@ for (let i = 0; i < ledgers.length; ++i) {
       "
     volumes:
       - "./data/uploads${i}:/usr/src/app/uploads"
+${getPluginModules(i)}
     networks:
       kit:
         aliases:

@@ -80,7 +80,12 @@ file that could generate this network.
 
 ## Launching the Demo
 
+The first thing you'll want to do is clone any plugins you're using
+into the current directory. They need to be accessible for the docker
+daemon to mount as volumes.
+
 ```sh
+$ git clone https://github.com/interledgerjs/ilp-plugin-virtual.git
 $ node generate-docker-compose.js --ledger example.json > docker-compose.yml
 $ docker-compose build
 $ docker-compose up -d
@@ -147,7 +152,7 @@ below format.
 
 2. `currency`: The currency code of this ledger. Used by the connector to determine exchange rates.
 
-3. `plugin`: The plugin module for this ledger. Must be cloned as a folder in the current directory.
+3. `plugin`: The plugin module for this ledger. Must be a folder in the current directory. The plugin will then be mounted in the ILP Kit's node_modules.
 
 4. `store`: Set to `true` or `false` (can also be omitted). If this value is `true`, a store will be passed into the plugin constructor, as per the [Ledger Plugin Interface](https://github.com/interledger/rfcs/blob/master/0004-ledger-plugin-interface/0004-ledger-plugin-interface.md#_store).
 
