@@ -1,0 +1,53 @@
+[
+  { "prefix": "peer.5rd3h.usd.9.",
+    "currency": "USD",
+    "plugin": "ilp-plugin-virtual",
+    "store": true,
+    "rpcUri": true,
+    "left_account": "peer.5rd3h.usd.9.zhdq6D_w8fs_rr9J9tabzbzdcty4C3kdgm0IQiW_sEE",
+    "right_account": "peer.5rd3h.usd.9.HxImRkXntSjdLb97VMTwwEYPGXJ_ziWoHEyVjtDSGDk",
+    "left_config": {
+      "secret": "dave_secret",
+      "peerPublicKey": "HxImRkXntSjdLb97VMTwwEYPGXJ_ziWoHEyVjtDSGDk",
+      "currency": "USD",
+      "maxBalance": "20000000000",
+      "currencyCode": "USD",
+      "currencyScale": 9
+
+    },
+    "right_config": {
+      "secret": "connie_secret",
+      "peerPublicKey": "zhdq6D_w8fs_rr9J9tabzbzdcty4C3kdgm0IQiW_sEE",
+      "currency": "USD",
+      "maxBalance": "20000000000",
+      "currencyCode": "USD",
+      "currencyScale": 9
+    }
+  }, {
+    "prefix": "peer.UkTdT.btc.9.",
+    "currency": "BTC",
+    "plugin": "ilp-plugin-virtual",
+    "store": true,
+    "rpcUri": true,
+    "left_account": "peer.UkTdT.btc.9.HxImRkXntSjdLb97VMTwwEYPGXJ_ziWoHEyVjtDSGDk",
+    "right_account": "peer.UkTdT.btc.9.VfOMmtMEtLuNw9bVhCp4mX-Qj3ZYpqBKhyEVq408dno",
+    "optionsLeft": {
+      "secret": "connie_secret",
+      "publicKey": "HxImRkXntSjdLb97VMTwwEYPGXJ_ziWoHEyVjtDSGDk",
+      "peerPublicKey": "VfOMmtMEtLuNw9bVhCp4mX-Qj3ZYpqBKhyEVq408dno",
+      "currency": "BTC",
+      "maxBalance": "20000000000",
+      "currencyCode": "BTC",
+      "currencyScale": 9
+    },
+    "optionsRight": {
+      "secret": "bob_secret",
+      "publicKey": "VfOMmtMEtLuNw9bVhCp4mX-Qj3ZYpqBKhyEVq408dno",
+      "peerPublicKey": "HxImRkXntSjdLb97VMTwwEYPGXJ_ziWoHEyVjtDSGDk",
+      "currency": "BTC",
+      "maxBalance": "20000000000",
+      "currencyCode": "BTC",
+      "currencyScale": 9
+    }
+  }
+]

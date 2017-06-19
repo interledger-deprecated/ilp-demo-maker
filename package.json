@@ -1,0 +1,15 @@
+{
+  "name": "ilp-demo-maker",
+  "version": "1.0.0",
+  "description": "> Set up a payment between many different ILP Kit nodes",
+  "main": "generate-docker-compose.js",
+  "dependencies": {
+    "yargs": "^8.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,24 @@
+digraph ILP {
+  
+  k0 [label="Kit 0",shape="circle"]
+  k1 [label="Kit 1",shape="circle"]
+  k2 [label="Kit 2",shape="circle"]
+  k3 [label="Kit 3",shape="circle"]
+  k4 [label="Kit 4",shape="circle"]
+  k5 [label="Kit 5",shape="circle"]
+  k6 [label="Kit 6",shape="circle"]
+
+  v [label="Virtual",shape="box"]
+  et [label="Ethereum (Escrow)",shape="box"]
+  xp [label="XRP (Paychan)",shape="box"]
+  ch [label="Chain",shape="box"]
+  bp [label="Bitcoin (Paychan)",shape="box"]
+  xe [label="XRP (Escrow)",shape="box"]
+  v2 [label="Virtual",shape="box"]
+
+  {rank = same;k0;k1;k2;k3;k4;k5;k6;v;et;xp;ch;bp;xe}
+
+  k0 -> v -> k1 -> et -> k2 -> xp -> k3
+  k3 -> ch -> k4 -> bp -> k5 -> xe -> k6
+  k6 -> v2 -> k0
+}

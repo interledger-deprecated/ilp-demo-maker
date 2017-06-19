@@ -1,0 +1,13 @@
+digraph ILP {
+  graph [nodesep="3",splines="false"]
+  
+  k0 [label="Kit 0",shape="circle"]
+  k1 [label="Kit 1",shape="circle"]
+
+  la [label="Ledger A",shape="box"]
+
+  {rank = same; k0; k1}
+  
+  k0 -> la [label="Left"]
+  la -> k1 [label="Right"]
+}

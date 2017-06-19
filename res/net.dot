@@ -1,0 +1,16 @@
+digraph ILP {
+  
+  k0 [label="Kit 0",shape="circle"]
+  k1 [label="Kit 1",shape="circle"]
+  k2 [label="Kit 2",shape="circle"]
+  k3 [label="Kit 3",shape="circle"]
+
+  la [label="Ledger A",shape="box"]
+  lb [label="Ledger B",shape="box"]
+  lc [label="Ledger C",shape="box"]
+  ld [label="Ledger D",shape="box"]
+
+  {rank = same; k0; la; k1; lb; k2; lc; k3}
+
+  k0 -> la -> k1 -> lb -> k2 -> lc -> k3 -> ld -> k0
+}
