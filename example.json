@@ -31,7 +31,7 @@
     "rpcUri": true,
     "left_account": "peer.UkTdT.btc.9.HxImRkXntSjdLb97VMTwwEYPGXJ_ziWoHEyVjtDSGDk",
     "right_account": "peer.UkTdT.btc.9.VfOMmtMEtLuNw9bVhCp4mX-Qj3ZYpqBKhyEVq408dno",
-    "optionsLeft": {
+    "left_config": {
       "secret": "connie_secret",
       "publicKey": "HxImRkXntSjdLb97VMTwwEYPGXJ_ziWoHEyVjtDSGDk",
       "peerPublicKey": "VfOMmtMEtLuNw9bVhCp4mX-Qj3ZYpqBKhyEVq408dno",
@@ -40,7 +40,7 @@
       "currencyCode": "BTC",
       "currencyScale": 9
     },
-    "optionsRight": {
+    "right_config": {
       "secret": "bob_secret",
       "publicKey": "VfOMmtMEtLuNw9bVhCp4mX-Qj3ZYpqBKhyEVq408dno",
       "peerPublicKey": "HxImRkXntSjdLb97VMTwwEYPGXJ_ziWoHEyVjtDSGDk",

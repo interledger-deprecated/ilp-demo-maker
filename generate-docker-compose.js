@@ -27,9 +27,9 @@ networks:
 services:
 
   postgres:
-    container_name: "postgres"
+    container_name: "ilp-demo-maker-postgres"
     build:
-      context: "."
+      context: "src"
       dockerfile: "PostgresDockerfile"
     volumes:
       - "./data/postgres-data:/var/lib/postgresql/data"
@@ -55,8 +55,8 @@ function createConfig (n, ledger, isLeft) {
     options: Object.assign({},
       ledger.optionsCommon,
       isLeft
-        ? ledger.optionsLeft
-        : ledger.optionsRight)
+        ? ledger.left_config
+        : ledger.right_config)
   }
 
   const pn = peerToSide(isLeft, n)
@@ -99,7 +99,7 @@ function generateConnectorRoutes (i) {
   const next = (i + 1) % ledgers.length
   const ledger = ledgers[next]
   const connectorRoutes = [ {
-    targetPrefix: '',
+    targetPrefix: 'test.',
     connectorLedger: ledger.prefix,
     connectorAccount: ledger.right_account
   } ]
@@ -113,7 +113,7 @@ function getPluginModules (i) {
   const indent = '      - ' // ' 'x6
   const module = '/usr/src/app/node_modules/'
 
-  return (indent + './' + ledgers[i].plugin + ':' + module + ledgers[i].plugin + '\n'
+  return (indent + './' + ledgers[i].plugin + ':' + module + ledgers[i].plugin + '\n' +
     indent + './' + ledgers[next].plugin + ':' + module + ledgers[next].plugin + '\n')
 }
 
@@ -122,9 +122,9 @@ file += header
 for (let i = 0; i < ledgers.length; ++i) {
   file += `
   ilp-kit${i}:
-    container_name: "ilp-kit${i}"
+    container_name: "ilp-demo-maker-kit${i}"
     build:
-      context: "."
+      context: "src"
       dockerfile: "IlpKitDockerfile"
     command: >
       /bin/bash -c "
@@ -161,7 +161,6 @@ ${getPluginModules(i)}
       CONNECTOR_ENABLE: "true"
       CONNECTOR_LEDGERS: '${generateConnectorLedgers(i)}'
       CONNECTOR_ROUTES: '${generateConnectorRoutes(i)}'
-      CONNECTOR_ROUTE_BROADCAST_ENABLED: "false"
       CONNECTOR_BACKEND: "fixerio-plus-coinmarketcap"
       CONNECTOR_MAX_HOLD_TIME: "2000"
       API_REGISTRATION: "true"

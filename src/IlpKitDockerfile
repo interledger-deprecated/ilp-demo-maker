@@ -9,5 +9,8 @@ RUN apt-get update && apt-get install -y git netcat
 RUN sed -i "s/('https:/('http:/" node_modules/ilp/src/lib/spsp.js
 RUN sed -i 's/tls_only: true/tls_only: false/' api/src/lib/utils.js
 
+# very dirty backporting of this fix https://github.com/interledgerjs/ilp-routing/pull/47
+RUN sed -i 's/|| prefix > e//' node_modules/ilp-routing/src/lib/prefix-map.js
+
 # launch ILP kit
 CMD [ "npm", "start" ]
