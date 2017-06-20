@@ -86,7 +86,8 @@ daemon to mount as volumes.
 
 ```sh
 $ git clone https://github.com/interledgerjs/ilp-plugin-virtual.git
-$ node generate-docker-compose.js --ledger example.json > docker-compose.yml
+$ npm install
+$ node generate-docker-compose.js --ledgers example.json > docker-compose.yml
 $ docker-compose build
 $ docker-compose up -d
 $ docker-compose logs -f
@@ -158,7 +159,7 @@ below format.
 
 5. `rpcUri`: Set to `true` or `false` (can also be ommitted). If this value is `true`, an RPC Uri will be passed into the plugin constructor. This URI will point to the peer's RPC endpoint. This will be the correct value for any bilateral plugin (like `ilp-plugin-virtual` or `ilp-plugin-xrp-paychan`).
 
-6. `rpcUris`: Set to `true` or `false` (can also be omitted). If this value is `true`, an object called `rpcUris` will be passed into the plugin constructor. It will have one key, set to the peer's account, and the value will be that peer's RPC Uri. Used for plugins like `ilp-plugin-xrp-escrow` that fall back on RPC for messaging. 
+6. `rpcUris`: Set to `true` or `false` (can also be omitted). If this value is `true`, an object called `rpcUris` will be passed into the plugin constructor. It will have one key, set to the peer's account, and the value will be that peer's RPC Uri. Used for plugins like `ilp-plugin-xrp-escrow` that fall back on RPC for messaging.
 
 ![Left vs. Right](https://interledgerjs.github.io/ilp-demo-maker/res/left.svg)
 
