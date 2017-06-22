@@ -112,9 +112,16 @@ function getPluginModules (i) {
   const next = (i + 1) % ledgers.length
   const indent = '      - ' // ' 'x6
   const module = '/usr/src/app/node_modules/'
+  const leftPlugin = ledgers[i].plugin
+  const rightPlugin = ledgers[next].plugin
 
-  return (indent + './' + ledgers[i].plugin + ':' + module + ledgers[i].plugin + '\n' +
-    indent + './' + ledgers[next].plugin + ':' + module + ledgers[next].plugin + '\n')
+  let pluginModules = indent + './' + ledgers[i].plugin + ':' + module + ledgers[i].plugin + '\n'
+
+  if (ledgers[i].plugin !== ledgers[next].plugin) {
+    pluginModules += indent + './' + ledgers[next].plugin + ':' + module + ledgers[next].plugin + '\n'
+  }
+
+  return pluginModules
 }
 
 let file = ''
