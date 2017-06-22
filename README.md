@@ -1,92 +1,48 @@
 # ILP Demo Maker
 > Set up a payment between many different ILP Kit nodes
 
-![7-ledger Demo](https://interledgerjs.github.io/ilp-demo-maker/res/demo.svg)
-
 The ILP Demo Maker constructs a network of ILP Kit nodes for
 the purpose of running a demo. Each of the ILP Kits exposes a user interface,
 and routing is preconfigured by the script.
-
-## Purpose
-
-Because it can be cumbersome to set up many ILP Kits by hand, the tool uses a
-JSON file to generate a docker compose file, containing all the ILP kits used
-to set up the required plugins. Below is an example network that this script
-could create.
 
 ![Example network created by this script](https://interledgerjs.github.io/ilp-demo-maker/res/net.svg)
 
 The network created is a ring, allowing any ILP Kit to pay to any other ILP
 kit. The payments go in one direction around the ring. The final ledger goes
-from the last ILP Kit back to the first one. Below is an example of the JSON
-file that could generate this network.
+from the last ILP Kit back to the first one.
 
-```js
-[ {
-    "prefix": "example.ledgerA.",
-    "currency": "USD",
-    "plugin": "ilp-plugin-A",
-    "left_account": "example.ledgerA.alice",
-    "left_config": {
-      /* ... */
-    },
-    "right_account": "example.ledgerA.bob",
-    "right_config": {
-      /* ... */
-    }
-  }, {
-    "prefix": "example.ledgerB."
-    "currency": "EUR",
-    "plugin": "ilp-plugin-B",
-    "store": true,
-    "left_account": "example.ledgerB.connie",
-    "left_config": {
-      /* ... */
-    },
-    "right_account": "example.ledgerB.dave",
-    "right_config": {
-      /* ... */
-    }
-  }, {
-    "prefix": "example.ledgerC."
-    "currency": "BTC",
-    "plugin": "ilp-plugin-C",
-    "store": true,
-    "rpcUri": true,
-    "left_account": "example.ledgerC.8OnOc_10khTfRrl00HjBAVjgxnWlJI6lGKaNIxuMJdY",
-    "left_config": {
-      /* ... */
-    },
-    "right_account": "example.ledgerC.5mIwWkg-WKw-IvWu13Uz4GCxdrCxWaVzNkpfOehIguI",
-    "right_config": {
-      /* ... */
-    }
-  }, {
-    "prefix": "example.ledgerD."
-    "currency": "XRP",
-    "plugin": "ilp-plugin-D",
-    "rpcUris": true,
-    "left_account": "example.ledgerD.r3528935rjwitjQWFJUIAW",
-    "left_config": {
-      /* ... */
-    },
-    "right_account": "example.ledgerD.r35624QWAMdanwdnawhna",
-    "right_config": {
-      /* ... */
-    }
-  }
-]
-```
+## Purpose
+
+Because it can be cumbersome to set up many ILP Kits by hand, the tool uses a
+JSON file to generate a Docker Compose file, containing all the ILP kits used
+to set up the required plugins.
 
 ## Launching the Demo
 
-The first thing you'll want to do is clone any plugins you're using
-into the current directory. They need to be accessible for the docker
-daemon to mount as volumes.
+### Prerequisites
+
+- Docker >=17.0.0
+- Docker Compose >=1.14.0
+- Node.js >= 6.something
+
+### Setup
+
+Clone the repo and clone each of the plugins you want to use into the `ilp-demo-maker` directory.
+They need to be acccessible for Docker to mount them as volumes.
 
 ```sh
-$ git clone https://github.com/interledgerjs/ilp-plugin-virtual.git
+$ git clone https://github.com/interledgerjs/ilp-demo-maker.git
+$ cd ilp-demo-maker
 $ npm install
+$ git clone https://github.com/{YOUR_PLUGIN}
+$ cd YOUR_PLUGIN && npm install && cd ..
+```
+
+### Running
+
+Generate a Docker Compose file from the [ledgers configuration file](#configuration-format) and run it.
+
+```
 $ node generate-docker-compose.js --ledgers example.json > docker-compose.yml
 $ docker-compose build
 $ docker-compose up -d
@@ -99,7 +55,7 @@ sure that you delete the `data` folder.
 
 To send some test payments, log into one of your ILP kits with `admin:password`.
 You'll need to have the source and destination ILP Kit in your hosts file to do
-this. Add an entry for each of your ILP kits in your /etc/hosts file, like so:
+this. Add an entry for each of your ILP kits in your `/etc/hosts` file, like so:
 
 ```
 127.0.0.1 ilp-kit0
@@ -111,42 +67,33 @@ this. Add an entry for each of your ILP kits in your /etc/hosts file, like so:
 To send from Kit 0 to Kit 3, log into `ilp-kit0:2010` as `admin`. Send a payment
 to `admin@ilp-kit3:5010` in the sending UI.
 
-### Custom Header File
 
-If you need any additional containers in the docker-compose (eg. a bitcoin
-node, an extra five-bells-ledger, etc.), you can set an alternate header file.
-This will replace the start of the docker-compose (before the ILP Kit
-containers are added) with a file of your choice.
-
-```sh
-$ node generate-docker-compose.js --ledger example.json --header header.yml > docker-compose.yml
-$ docker-compose build
-$ docker-compose up -d
-$ docker-compose logs -f
-```
-
-## Configuration Format Specification
+## Configuration Format
 
 The JSON file used for the ILP Demo maker contains an array of objects in the
-below format.
+below format. See [`example.json`](./example.json) for a sample config file.
 
 ```js
-{
-  "prefix": "example.ledgerA.", // (1)
-  "currency": "USD", // (2)
-  "plugin": "ilp-plugin-A", // (3)
-  "store": true, // [optional] (4)
-  "rpcUri": true, // [optional] (5)
-  "rpcUris": true, // [optional] (6)
-  "left_account": "example.ledgerA.alice", // (7)
-  "left_config": { // (8)
-    /* ... */
-  },
-  "right_account": "example.ledgerA.bob",
-  "right_config": {
-    /* ... */
+[
+  {
+    "prefix": "example.ledgerA.", // (1)
+    "currency": "USD", // (2)
+    "plugin": "ilp-plugin-A", // (3)
+    "store": true, // [optional] (4)
+    "rpcUri": true, // [optional] (5)
+    "rpcUris": true, // [optional] (6)
+    "left_account": "example.ledgerA.alice", // (7)
+    "left_config": { // (8)
+      /* fields required by ilp-plugin-A for account alice */
+    },
+    "right_account": "example.ledgerA.bob",
+    "right_config": {
+      /* fields required by ilp-pluginA for account bob */
+    }
+  }, {
+    // next plugin setup
   }
-}
+]
 ```
 
 1. `prefix`: The prefix field contains the ILP prefix for this ledger. This prefix must match the value returned by `plugin.getInfo().prefix` for this plugin. If it does not, routing errors will occur, causing all payments to fail.
@@ -167,3 +114,17 @@ below format.
 the left account to the right account. `right_account` functions the same, but for the plugin on the right.
 
 8. `left_config`: The plugin configuration for the plugin on the left of the ledger. This object is passed directly to the plugin constructor. If `store`, `rpcUri`, or `rpcUris` are set, their fields will be added to this object. `right_config` functions the same, but for the plugin on the right.
+
+### Custom Header File
+
+If you need any additional containers in the docker-compose (eg. a bitcoin
+node, an extra five-bells-ledger, etc.), you can set an alternate header file.
+This will replace the start of the docker-compose (before the ILP Kit
+containers are added) with a file of your choice.
+
+```sh
+$ node generate-docker-compose.js --ledger example.json --header header.yml > docker-compose.yml
+$ docker-compose build
+$ docker-compose up -d
+$ docker-compose logs -f
+```
